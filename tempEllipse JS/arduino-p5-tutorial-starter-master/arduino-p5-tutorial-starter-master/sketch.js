@@ -37,6 +37,7 @@ function setup() {
 
 function draw() {
 	background(0);
+	var widthEllipseScale = 20;
 
 
 	// TEST
@@ -45,23 +46,23 @@ function draw() {
 	if (inData > 10 && inData < 25) {
 		fill(255);
 		textSize(32);
-		text("Hello World!", width / 2 - 50, height / 2);
+		text("Hello World!", width / 2 - 80, height / 2);
 		fill(120, 120, 120, 150)
-		ellipse(width / 2, height / 2, inData * 50, inData * 50);
+		ellipse(width / 2, height / 2, inData * widthEllipseScale, inData * widthEllipseScale);
 	}
 	if (inData < 0.5) {
 		fill(255);
 		textSize(32);
-		text("Goodbye World!", width / 2 - 50, height / 2);
+		text("Goodbye World!", width / 2 - 80, height / 2);
 		fill(120, 120, 120, 100)
-		ellipse(width / 2, height / 2, inData * 50, inData * 50);
+		ellipse(width / 2, height / 2, inData * widthEllipseScale, inData * widthEllipseScale);
 	}
 	if (inData > 25) {
 		fill(255, 255, 255);
 		textSize(32);
-		text("Drink your Coffee!", width / 2 - 50, height / 2);
+		text("Drink your Coffee!", width / 2 - 80, height / 2);
 		fill(255, 120, 120, 200)
-		ellipse(width / 2, height / 2, inData * 50, inData * 50);
+		ellipse(width / 2, height / 2, inData * widthEllipseScale, inData * widthEllipseScale);
 		nofill();
 	}
 
