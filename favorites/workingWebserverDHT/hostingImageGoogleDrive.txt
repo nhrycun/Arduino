@@ -1,0 +1,13 @@
+Hosting an image with google drive
+
+Original URL: https://drive.google.com/file/d/0B6wwyazyzml-OGQ3VUo0Z2thdmc/view
+
+You need to copy the ID from the original URL (the characters between the /d/ and /view), and use it in this URL:
+
+https://drive.google.com/uc?export=view&id=0B6wwyazyzml-OGQ3VUo0Z2thdmc
+
+
+calm background:
+
+link: https://drive.google.com/file/d/1XSnYp3YTNQmV2nWWJrZg07X6IXtezxnk/view?usp=sharing
+host: https://drive.google.com/uc?export=view&id=1XSnYp3YTNQmV2nWWJrZg07X6IXtezxnk
