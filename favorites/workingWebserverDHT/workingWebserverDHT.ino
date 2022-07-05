@@ -2,8 +2,7 @@
  #include <dht.h>
 
 
-#define dht_apin 18 // Analog Pin sensor is connected to
-
+#define dht_apin 18 // set the pin for the sensor output. Output has a resister 108mhz on it.
 dht DHT;
 
 
@@ -17,8 +16,7 @@ WiFiServer server(80);
 void setup()
 {
     Serial.begin(115200);
-    pinMode(5, OUTPUT);      // set the LED pin mode
-
+    pinMode(5, OUTPUT);      // led Pin
     delay(10);
 
     // We start by connecting to a WiFi network
@@ -50,6 +48,7 @@ void setup()
 int value = 0;
 
 void loop(){
+
  WiFiClient client = server.available();   // listen for incoming clients
 if (client)
     {
@@ -65,16 +64,16 @@ if (client)
                   client.println ("HTTP/1.1 200 OK");
                   client.println ("Content-Type: text/html");
                   client.println ("Connection: close");
-                  client.println ("Refresh: 5");
+                  client.println ("Refresh: 60");
                   client.println ( );
                   client.println ("<!DOCTYPE HTML>");
                   client.println ("<html>");
                   client.print ("<Title>Arduino Office Temperature </Title>");
                   client.print ("<h1>Office Temperature</h1>");
                   client.print ("<h4>Temperature in C: ");
-                  client.print (DHT.temperature);client.print("C");
+                  client.print (int(DHT.temperature));client.print("C");
                   client.print ("</h4><h4>Humidity: ");
-                  client.print (DHT.humidity);client.print("%");
+                  client.print (int(DHT.humidity));client.print("%");
                      if (DHT.temperature > 27)
                     {
                       client.print ("<h4 style=\"color:red\">");
@@ -90,6 +89,7 @@ if (client)
                   client.println ("</h4>");
                     if(DHT.temperature > 27){client.print("<h4>Turn the fan on!</h4>");}
                     if(DHT.temperature < 20){client.print("<h4>Turn the A/C off!</h4>");}
+
                   client.println ("<br />");
                   client.println ("</html>");
                   break;
@@ -105,7 +105,6 @@ if (client)
             }
         }
     }
-    delay(10000);
     // close the connection:
     client.stop();
     Serial.println("Client Disconnected.");
@@ -113,11 +112,12 @@ if (client)
    DHT.read11(dht_apin);
 
     Serial.print("Current humidity = ");
-    Serial.print(DHT.humidity);
+    Serial.print(int(DHT.humidity));
     Serial.print("%  ");
     Serial.print("temperature = ");
-    Serial.print(DHT.temperature);
+    Serial.print(int(DHT.temperature));
     Serial.println("C  ");
+    delay(1000);
 
-    delay(500);//Wait 5 seconds before accessing sensor again.
+
 }
