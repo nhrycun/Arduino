@@ -61,7 +61,7 @@ void loop() {
           client.println();
           client.println("<!DOCTYPE HTML>");
           client.println("<html>");
-          if (((DHT.temperature > 21) && (DHT.temperature < 28)) && ((DHT.humidity > 21) && (DHT.humidity < 81))) {
+          if (((DHT.temperature > 21) && (DHT.temperature < 28)) || ((DHT.humidity > 21) && (DHT.humidity < 81))) {
             client.println("<body style=\"background-image: url('https://drive.google.com/uc?export=view&id=1XSnYp3YTNQmV2nWWJrZg07X6IXtezxnk'); background-size: cover; background-repeat: no-repeat;\">");
           }
           client.print("<Title>Arduino Office Temperature </Title>");
