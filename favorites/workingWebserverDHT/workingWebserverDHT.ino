@@ -61,7 +61,7 @@ void loop() {
           client.println();
           client.println("<!DOCTYPE HTML>");
           client.println("<html>");
-          client.println("<body style=\"background-image: url('https://drive.google.com/uc?export=view&id=1XSnYp3YTNQmV2nWWJrZg07X6IXtezxnk'); background-size: cover; background-repeat: no-repeat;\">");
+          if ((DHT.temperature >= 20 && <= 27)&&(DHT.humidity >=20 && <=80)){client.println("<body style=\"background-image: url('https://drive.google.com/uc?export=view&id=1XSnYp3YTNQmV2nWWJrZg07X6IXtezxnk'); background-size: cover; background-repeat: no-repeat;\">")};
           client.print("<Title>Arduino Office Temperature </Title>");
           client.print("<h1>Office Temperature</h1>");
           client.print("<h4>Temperature in C: ");
@@ -70,9 +70,6 @@ void loop() {
           client.print("</h4><h4>Humidity: ");
           client.print(int(DHT.humidity));
           client.print("%");
-          if (DHT.temperature > 27) {
-            client.print("<h4 style=\"color:red\">");
-          }
           if (DHT.humidity > 80) {
             client.println("<body style=\"background-image: url('https://drive.google.com/uc?export=view&id=1HUMCTw977PAL5y9UZpfz9o42BD4YNtbB'); background-size: cover; background-repeat: no-repeat;\">");
             client.print("<h4>Humidity is too high</h4>");
