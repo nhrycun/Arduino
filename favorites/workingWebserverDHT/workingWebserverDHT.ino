@@ -57,11 +57,13 @@ void loop() {
           client.println("HTTP/1.1 200 OK");
           client.println("Content-Type: text/html");
           client.println("Connection: close");
-          client.println("Refresh: 60");
+          client.println("Refresh: 15");
           client.println();
           client.println("<!DOCTYPE HTML>");
           client.println("<html>");
-          if ((DHT.temperature >= 20 && <= 27)&&(DHT.humidity >=20 && <=80)){client.println("<body style=\"background-image: url('https://drive.google.com/uc?export=view&id=1XSnYp3YTNQmV2nWWJrZg07X6IXtezxnk'); background-size: cover; background-repeat: no-repeat;\">")};
+          if (((DHT.temperature > 21) && (DHT.temperature < 28)) && ((DHT.humidity > 21) && (DHT.humidity < 81))) {
+            client.println("<body style=\"background-image: url('https://drive.google.com/uc?export=view&id=1XSnYp3YTNQmV2nWWJrZg07X6IXtezxnk'); background-size: cover; background-repeat: no-repeat;\">");
+          }
           client.print("<Title>Arduino Office Temperature </Title>");
           client.print("<h1>Office Temperature</h1>");
           client.print("<h4>Temperature in C: ");
