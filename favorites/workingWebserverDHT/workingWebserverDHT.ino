@@ -1,19 +1,25 @@
 #include <dht.h>
 
 
+
 #define dht_apin 18  // set the pin for the sensor output. Output has a resister 108mhz on it.
 dht DHT;
 
 
 #include <WiFi.h>
 
+//const char* ssid = "NTH Telus";
+//const char* password = "cgwxk2ntzt";
 const char* ssid = "NTH";
 const char* password = "teresa3884";
+
 //Background Images for the website
-const char* bgCalm = "https://drive.google.com/uc?export=view&id=1XSnYp3YTNQmV2nWWJrZg07X6IXtezxnk";
-const char* bgAngry = "https://drive.google.com/uc?export=view&id=1HUMCTw977PAL5y9UZpfz9o42BD4YNtbB";
+//const char* bgCalm = "https://drive.google.com/uc?export=view&id=1XSnYp3YTNQmV2nWWJrZg07X6IXtezxnk";
+//const char* bgAngry = "https://drive.google.com/uc?export=view&id=1HUMCTw977PAL5y9UZpfz9o42BD4YNtbB";
 
 WiFiServer server(80);
+
+String hostname = "OfficeTemperature";
 
 void setup() {
   Serial.begin(115200);
@@ -27,6 +33,8 @@ void setup() {
   Serial.print("Connecting to ");
   Serial.println(ssid);
 
+  WiFi.setHostname(hostname.c_str());  //define hostname
+  WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE, INADDR_NONE);
   WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED) {
@@ -41,6 +49,14 @@ void setup() {
   Serial.println("WiFi connected.");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
+  Serial.print("Subnet Mask: ");
+  Serial.println(WiFi.subnetMask());
+  Serial.print("GatewayIP: ");
+  Serial.println(WiFi.gatewayIP());
+  Serial.print("DNS 1: ");
+  Serial.println(WiFi.dnsIP(0));
+  Serial.print("DNS 2: ");
+  Serial.println(WiFi.dnsIP(1));
 
   server.begin();
 }
@@ -65,7 +81,7 @@ void loop() {
           client.println("<!DOCTYPE HTML>");
           client.println("<html>");
           if (((DHT.temperature > 21) && (DHT.temperature < 28)) || ((DHT.humidity > 21) && (DHT.humidity < 81))) {
-            client.println("<body style=\"background-image: url('bgCalm'); background-size: cover; background-repeat: no-repeat;\">");
+            client.println("<body style=\"background-image: url('https://drive.google.com/uc?export=view&id=1HUMCTw977PAL5y9UZpfz9o42BD4YNtbB'); background-size: cover; background-repeat: no-repeat;\">");
           }
           client.print("<Title>Arduino Office Temperature </Title>");
           client.print("<h1>Office Temperature</h1>");
@@ -76,20 +92,20 @@ void loop() {
           client.print(int(DHT.humidity));
           client.print("%");
           if (DHT.humidity > 80) {
-            client.println("<body style=\"background-image: url('bgAngry'); background-size: cover; background-repeat: no-repeat;\">");
+            client.println("<body style=\"background-image: url('https://drive.google.com/uc?export=view&id=1HUMCTw977PAL5y9UZpfz9o42BD4YNtbB'); background-size: cover; background-repeat: no-repeat;\">");
             client.print("<h4>Humidity is too high</h4>");
           }
           if (DHT.humidity < 20) {
-            client.println("<body style=\"background-image: url('bgAngry'); background-size: cover; background-repeat: no-repeat;\">");
+            client.println("<body style=\"background-image: url('https://drive.google.com/uc?export=view&id=1HUMCTw977PAL5y9UZpfz9o42BD4YNtbB'); background-size: cover; background-repeat: no-repeat;\">");
             client.print("<h4>Humidity is too low</h4>");
           }
           client.println("</h4>");
           if (DHT.temperature > 27) {
-            client.println("<body style=\"background-image: url('bgAngry'); background-size: cover; background-repeat: no-repeat;\">");
+            client.println("<body style=\"background-image: url('https://drive.google.com/uc?export=view&id=1HUMCTw977PAL5y9UZpfz9o42BD4YNtbB'); background-size: cover; background-repeat: no-repeat;\">");
             client.print("<h4>Turn the fan on!</h4>");
           }
           if (DHT.temperature < 20) {
-            client.println("<body style=\"background-image: url('bgAngry'); background-size: cover; background-repeat: no-repeat;\">");
+            client.println("<body style=\"background-image: url('https://drive.google.com/uc?export=view&id=1HUMCTw977PAL5y9UZpfz9o42BD4YNtbB'); background-size: cover; background-repeat: no-repeat;\">");
             client.print("<h4>Turn the A/C off!</h4>");
           }
 
