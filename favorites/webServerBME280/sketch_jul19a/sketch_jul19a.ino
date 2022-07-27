@@ -23,7 +23,7 @@ String header;
 // Current time
 unsigned long currentTime = millis();
 // Previous time
-unsigned long previousTime = 0; 
+unsigned long previousTime = 0;
 // Define timeout time in milliseconds (example: 2000ms = 2s)
 const long timeoutTime = 2000;
 
@@ -33,7 +33,7 @@ void setup() {
 
   // default settings
   // (you can also pass in a Wire library object like &Wire2)
-  //status = bme.begin();  
+  //status = bme.begin();
   if (!bme.begin(0x76)) {
     Serial.println("Could not find a valid BME280 sensor, check wiring!");
     while (1);
@@ -80,40 +80,40 @@ void loop(){
             client.println("Connection: close");
             client.println("Refresh: 15");
             client.println();
-            
+
             // Display the HTML web page
             client.println("<!DOCTYPE html><html>");
             client.println("<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
             client.println("<link rel=\"icon\" href=\"data:,\">");
-            // CSS to style the table 
-            client.println("<style>body { text-align: center; font-family: \"Trebuchet MS\", Arial;}");
-            client.println("table { border-collapse: collapse; width:35%; margin-left:auto; margin-right:auto; }");
-            client.println("th { padding: 12px; background-color: #0043af; color: white; }");
-            client.println("tr { border: 1px solid #ddd; padding: 12px; }");
-            client.println("tr:hover { background-color: #bcbcbc; }");
-            client.println("td { border: none; padding: 12px; }");
-            client.println(".sensor { color:white; font-weight: bold; background-color: #bcbcbc; padding: 1px; }");
-            
+            // CSS to style the table
+            // client.println("<style>body { text-align: center; font-family: \"Trebuchet MS\", Arial;}");
+            // client.println("table { border-collapse: collapse; width:35%; margin-left:auto; margin-right:auto; }");
+            // client.println("th { padding: 12px; background-color: #0043af; color: white; }");
+            // client.println("tr { border: 1px solid #ddd; padding: 12px; }");
+            // client.println("tr:hover { background-color: #bcbcbc; }");
+            // client.println("td { border: none; padding: 12px; }");
+            // client.println(".sensor { color:white; font-weight: bold; background-color: #ffffff; padding: 1px; }");
+
             // Web Page Heading
             client.println("</style></head><body><h1>Office BME280</h1>");
             client.println("<table><tr><th>MEASUREMENTS</th><th>VALUE</th></tr>");
             client.println("<tr><td>Temp. Celsius</td><td><span class=\"sensor\">");
             client.println(bme.readTemperature());
-            client.println(" *C</span></td></tr>");  
+            client.println(" °C</span></td></tr>");
             client.println("<tr><td>Heat Index</td><td><span class=\"sensor\">");
             client.println(1.8 * bme.readTemperature() + 32);
-            client.println(" *F</span></td></tr>");       
+            client.println(" °</span></td></tr>");
             client.println("<tr><td>Pressure</td><td><span class=\"sensor\">");
             client.println(bme.readPressure() / 100.0F);
             client.println(" hPa</span></td></tr>");
             client.println("<tr><td>Approx. Altitude</td><td><span class=\"sensor\">");
             client.println(bme.readAltitude(SEALEVELPRESSURE_HPA));
-            client.println(" m</span></td></tr>"); 
+            client.println(" m</span></td></tr>");
             //client.println("<tr><td>Humidity</td><td><span class=\"sensor\">");
             // client.println(bme.readHumidity());
-            // client.println(" %</span></td></tr>"); 
+            // client.println(" %</span></td></tr>");
             client.println("</body></html>");
-            
+
             // The HTTP response ends with another blank line
             client.println();
             // Break out of the while loop
