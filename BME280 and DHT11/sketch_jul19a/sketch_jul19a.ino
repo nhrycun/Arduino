@@ -6,6 +6,9 @@
 
 #include <dht.h>
 
+#define dht_apin 18  // set the pin for the sensor output. Output has a resister 108mhz on it.
+dht DHT;
+
 #define SEALEVELPRESSURE_HPA (1013.25)
 
 Adafruit_BMP280 bme; // I2C
@@ -109,9 +112,9 @@ void loop(){
             client.println("<tr><td>Approx. Altitude</td><td><span class=\"sensor\">");
             client.println(bme.readAltitude(SEALEVELPRESSURE_HPA));
             client.println(" m</span></td></tr>"); 
-            //client.println("<tr><td>Humidity</td><td><span class=\"sensor\">");
-            // client.println(bme.readHumidity());
-            // client.println(" %</span></td></tr>"); 
+            client.println("<tr><td>Humidity</td><td><span class=\"sensor\">");
+            client.println(DHT.humidity);
+            client.println(" %</span></td></tr>"); 
             client.println("</body></html>");
             
             // The HTTP response ends with another blank line
@@ -141,6 +144,9 @@ void loop(){
 
     Serial.print("Altitude: ");
     Serial.println(bme.readAltitude());
+
+    Serial.print("Humidity: ");
+    Serial.println(DHT.humidity);
 
   }
 }
